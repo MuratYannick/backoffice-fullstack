@@ -1,4 +1,4 @@
-# 🚀 Backoffice Full-Stack - Jour 1
+# 🚀 Backoffice Full-Stack - Jour 2
 
 ## Architecture
 - **Frontend**: React + Vite + Tailwind CSS (port 5173)
@@ -21,5 +21,10 @@ npm run dev
 ✅ Frontend opérationnel
 ✅ Backend opérationnel
 ✅ Communication front-back établie
+✅ Navigation SPA fluide avec React Router
+✅ API REST professionnelle avec Express Router
+✅ Architecture organisée et scalable
+✅ Communication bidirectionnelle complète
+✅ Gestion des erreurs et états de chargement
 ⏳ Base de données (jour 3)
 ⏳ Authentification (jour 6) 
