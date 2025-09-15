@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./components/Navigation.jsx";
-import Home from "./pages/Home.jsx";
-import Articles from "./pages/Articles.jsx";
-import Users from "./pages/Users.jsx";
-
+import Navigation from "./components/Navigation";
+import Home from "./pages/Home";
+import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
+import Users from "./pages/Users";
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
@@ -12,11 +12,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:id" element={<ArticleDetail />} />
           <Route path="/users" element={<Users />} />
+          <Route path="*" element={<div>Page non trouvée</div>} />
         </Routes>
       </main>
     </div>
   );
 }
-
 export default App;
