@@ -1,3 +1,5 @@
+// frontend/src/pages/ArticleDetail.jsx
+
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ApiService from "../services/api";
 import { useApi } from "../hooks/useApi";

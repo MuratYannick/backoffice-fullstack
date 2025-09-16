@@ -1,3 +1,5 @@
+// frontend/src/pages/Articles.jsx
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ApiService from "../services/api";
