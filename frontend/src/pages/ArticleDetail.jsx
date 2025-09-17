@@ -35,7 +35,7 @@ export default function ArticleDetail() {
             {article.title}
           </h1>
           <div className="flex items-center text-sm text-gray-500 space-x-4">
-            <span>Par {article.author}</span>
+            <span>Par {article.author.name}</span>
             <span>•</span>
             <span>{article.createdAt}</span>
           </div>

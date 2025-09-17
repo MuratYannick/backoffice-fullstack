@@ -141,7 +141,7 @@ export default function Articles() {
                   </div>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900">
-                  {article.author}
+                  {article.author.name}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900">
                   {article.createdAt}
