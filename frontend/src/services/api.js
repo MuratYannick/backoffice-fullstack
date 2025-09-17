@@ -1,6 +1,5 @@
-// frontend/src/service/api.js
-
 const API_BASE_URL = "http://localhost:3000/api";
+
 class ApiService {
   async request(endpoint, options = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
@@ -53,4 +52,5 @@ class ApiService {
     return this.request(`/users/${id}`);
   }
 }
+
 export default new ApiService();

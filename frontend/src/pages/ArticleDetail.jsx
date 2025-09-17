@@ -1,10 +1,9 @@
-// frontend/src/pages/ArticleDetail.jsx
-
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ApiService from "../services/api";
 import { useApi } from "../hooks/useApi";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
+
 export default function ArticleDetail() {
   const { id } = useParams();
   const navigate = useNavigate();

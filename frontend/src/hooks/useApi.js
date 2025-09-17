@@ -1,5 +1,3 @@
-// frontend/src/hooks/useApi.js
-
 import { useState, useEffect } from "react";
 export function useApi(apiCall, dependencies = []) {
   const [data, setData] = useState(null);

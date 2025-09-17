@@ -1,11 +1,10 @@
-// frontend/src/pages/Articles.jsx
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ApiService from "../services/api";
 import { useApi } from "../hooks/useApi";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
+
 export default function Articles() {
   const { data, loading, error, refetch } = useApi(() =>
     ApiService.getArticles()
@@ -114,34 +113,22 @@ export default function Articles() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Article
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Auteur
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Date
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {articles.map((article) => (
+            {articles.map(article => (
               <tr key={article.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4">
                   <div>

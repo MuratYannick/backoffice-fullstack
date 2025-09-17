@@ -1,5 +1,3 @@
-// frontend/src/components/Navigation.jsx
-
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {

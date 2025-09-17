@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import Users from "./pages/Users";
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
