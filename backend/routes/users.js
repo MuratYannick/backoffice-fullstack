@@ -1,31 +1,44 @@
 const express = require("express");
+const { User, Article } = require("../models");
 const router = express.Router();
-// Données temporaires
-let users = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    role: "admin",
-    createdAt: "2024-01-10",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
-    role: "editor",
-    createdAt: "2024-01-12",
-  },
-];
-// GET /api/users - Récupérer tous les utilisateurs
-router.get("/", (req, res) => {
+// GET /api/users - Tous les utilisateurs
+router.get("/", async (req, res) => {
   try {
+    const users = await User.findAll({
+      attributes: ["id", "name", "email", "role", "isActive", "createdAt"],
+      include: [
+        {
+          model: Article,
+          as: "articles",
+          attributes: ["id", "status"],
+          required: false,
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+
+    // Ajouter statistiques pour chaque utilisateur
+    const usersWithStats = users.map((user) => {
+      const userData = user.toJSON();
+      const articles = userData.articles || [];
+
+      userData.stats = {
+        totalArticles: articles.length,
+        publishedArticles: articles.filter((a) => a.status === "published")
+          .length,
+        draftArticles: articles.filter((a) => a.status === "draft").length,
+      };
+
+      delete userData.articles;
+      return userData;
+    });
+
     res.json({
       success: true,
-      data: users,
-      count: users.length,
+      data: usersWithStats,
     });
   } catch (error) {
+    console.error("Erreur récupération utilisateurs:", error);
     res.status(500).json({
       success: false,
       message: "Erreur serveur",
@@ -33,11 +46,22 @@ router.get("/", (req, res) => {
     });
   }
 });
-// GET /api/users/:id - Récupérer un utilisateur spécifique
-router.get("/:id", (req, res) => {
+// GET /api/users/:id - Utilisateur spécifique
+router.get("/:id", async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const user = users.find((u) => u.id === id);
+    const { id } = req.params;
+
+    const user = await User.findByPk(id, {
+      attributes: ["id", "name", "email", "role", "isActive", "createdAt"],
+      include: [
+        {
+          model: Article,
+          as: "articles",
+          attributes: ["id", "title", "status", "publishedAt", "viewCount"],
+          order: [["createdAt", "DESC"]],
+        },
+      ],
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -51,6 +75,7 @@ router.get("/:id", (req, res) => {
       data: user,
     });
   } catch (error) {
+    console.error("Erreur récupération utilisateur:", error);
     res.status(500).json({
       success: false,
       message: "Erreur serveur",

@@ -1,10 +1,13 @@
+// frontend/src/pages/Users.jsx
+
 import ApiService from "../services/api";
 import { useApi } from "../hooks/useApi";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
-export default function Users() {
-  const { data, loading, error, refetch } = useApi(() => ApiService.getUsers());
 
+export default function Users() {
+
+  const { data, loading, error, refetch } = useApi(() => ApiService.getUsers());
   const users = data?.data || [];
 
   if (loading) return <LoadingSpinner />;
@@ -20,28 +23,16 @@ export default function Users() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Utilisateur
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Email
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Rôle
               </th>
-              <th
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500
-uppercase tracking-wider"
-              >
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Date d'inscription
               </th>
             </tr>

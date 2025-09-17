@@ -1,9 +1,12 @@
+// frontend/src/App.jsx
+
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import Users from "./pages/Users";
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
