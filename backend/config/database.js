@@ -47,4 +47,4 @@ async function testConnection() {
     process.exit(1);
   }
 }
-module.exports = { sequelize, testConnection };
+module.exports = { sequelize, testConnection, createDatabaseIfNotExists };
