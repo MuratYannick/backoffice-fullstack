@@ -98,6 +98,7 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+
 // POST /api/articles - Créer un article
 router.post("/", async (req, res) => {
   try {
@@ -115,6 +116,15 @@ router.post("/", async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Titre, contenu et auteur requis",
+      });
+    }
+
+    // Convertir l'ID de l'utilisateur en nombre entier
+    const userIdAsInt = parseInt(userId, 10);
+    if (isNaN(userIdAsInt)) {
+      return res.status(400).json({
+        success: false,
+        message: "ID d'utilisateur invalide",
       });
     }
 
@@ -142,10 +152,11 @@ router.post("/", async (req, res) => {
       title,
       summary,
       content,
-      categoryId,
+      categoryId: categoryId || null,
       userId,
       status,
     });
+
 
     // Récupération avec relations pour la réponse
     const articleWithRelations = await Article.findByPk(article.id, {

@@ -6,23 +6,35 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
 
 export default function Articles() {
-  const { data, loading, error, refetch } = useApi(() =>
-    ApiService.getArticles()
-  );
+  const {
+    data: articlesData,
+    loading: articlesLoading,
+    error: articlesError,
+    refetch,
+  } = useApi(() => ApiService.getArticles());
+
+  // Ajout de la récupération des utilisateurs pour le sélecteur
+  const {
+    data: usersData,
+    loading: usersLoading,
+    error: usersError,
+  } = useApi(() => ApiService.getUsers());
+
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    author: "",
+    userId: "", // Initialisé à une chaîne vide, mais sera rempli par le select
   });
 
-  const articles = data?.data || [];
+  const articles = articlesData?.data || [];
+  const users = usersData?.data || [];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await ApiService.createArticle(formData);
-      setFormData({ title: "", content: "", author: "" });
+      setFormData({ title: "", content: "", userId: "" });
       setShowForm(false);
       refetch(); // Recharger la liste
     } catch (error) {
@@ -37,8 +49,11 @@ export default function Articles() {
     });
   };
 
-  if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage message={error} onRetry={refetch} />;
+  if (articlesLoading || usersLoading) return <LoadingSpinner />;
+  if (articlesError || usersError)
+    return (
+      <ErrorMessage message={articlesError || usersError} onRetry={refetch} />
+    );
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -72,18 +87,28 @@ export default function Articles() {
                 required
               />
             </div>
+
+            {/* Remplacement de l'input par un sélecteur d'utilisateurs */}
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Auteur
               </label>
-              <input
-                type="text"
-                name="author"
-                value={formData.author}
+              <select
+                name="userId"
+                value={formData.userId}
                 onChange={handleInputChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
                 required
-              />
+              >
+                <option value="" disabled>
+                  Sélectionner un auteur
+                </option>
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -128,7 +153,7 @@ export default function Articles() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {articles.map(article => (
+            {articles.map((article) => (
               <tr key={article.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4">
                   <div>

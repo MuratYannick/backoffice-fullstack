@@ -97,11 +97,13 @@ module.exports = (sequelize, DataTypes) => {
         beforeCreate: (article) => {
           // Auto-génération du slug si non fourni
           if (!article.slug && article.title) {
+            console.log("slug")
             article.slug = article.title
               .toLowerCase()
               .replace(/[^a-z0-9]/g, "-")
               .replace(/-+/g, "-")
               .replace(/^-|-$/g, "");
+              console.log(article.slug)
           }
           // Publication automatique si status = published
           if (article.status === "published" && !article.publishedAt) {
