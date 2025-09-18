@@ -1,4 +1,4 @@
-# 🚀 Backoffice Full-Stack - Jour 2
+# 🚀 Backoffice Full-Stack - Jour 3
 
 ## Architecture
 🎨 Frontend : React + Vite + Tailwind + React Router
