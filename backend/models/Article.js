@@ -94,20 +94,33 @@ module.exports = (sequelize, DataTypes) => {
       ],
       // Hooks Sequelize
       hooks: {
-        beforeCreate: (article) => {
+        // Hook AVANT validation - pour générer le slug
+        beforeValidate: (article) => {
+          console.log("🚀 Hook beforeValidate exécuté");
+          
           // Auto-génération du slug si non fourni
           if (!article.slug && article.title) {
+            console.log("Génération du slug pour:", article.title);
             article.slug = article.title
               .toLowerCase()
               .replace(/[^a-z0-9]/g, "-")
               .replace(/-+/g, "-")
               .replace(/^-|-$/g, "");
+            console.log("Slug généré:", article.slug);
           }
+        },
+
+        // Hook AVANT création - pour la date de publication
+        beforeCreate: (article) => {
+          console.log("🚀 Hook beforeCreate exécuté");
+          
           // Publication automatique si status = published
           if (article.status === "published" && !article.publishedAt) {
             article.publishedAt = new Date();
+            console.log("Date de publication définie:", article.publishedAt);
           }
         },
+
         beforeUpdate: (article) => {
           // Mise à jour date de publication
           if (
