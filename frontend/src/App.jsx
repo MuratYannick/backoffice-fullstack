@@ -3,7 +3,7 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
-// import Categories from "./pages/Categories";
+import Categories from "./pages/Categories";
 import Users from "./pages/Users";
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="articles" element={<Articles />} />
         <Route path="articles/:id" element={<ArticleDetail />} />
-        {/* <Route path="categories" element={<Categories />} /> */}
+        <Route path="categories" element={<Categories />} />
         <Route path="users" element={<Users />} />
         <Route
           path="*"
