@@ -1,26 +1,34 @@
-// frontend/src/App.jsx
-
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
+import Categories from "./pages/Categories";
 import Users from "./pages/Users";
-
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navigation />
-      <main className="py-8 px-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:id" element={<ArticleDetail />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="*" element={<div>Page non trouvée</div>} />
-        </Routes>
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="articles" element={<Articles />} />
+        <Route path="articles/:id" element={<ArticleDetail />} />
+        <Route path="categories" element={<Categories />} />
+        <Route path="users" element={<Users />} />
+        <Route
+          path="*"
+          element={
+            <div className="text-center py-12">
+              <h1 className="text-2xl font-bold text-gray-900">
+                Page non trouvée
+              </h1>
+              <p className="text-gray-600 mt-2">
+                La page que vous cherchez n'existe pas.
+              </p>
+            </div>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 export default App;

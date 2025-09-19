@@ -51,6 +51,16 @@ class ApiService {
   async getUser(id) {
     return this.request(`/users/${id}`);
   }
+
+  //categories
+  async getCategories() {
+    return this.request("/categories");
+  }
+
+  async getCategory(id) {
+    return this.request(`/categories/${id}`)
+  }
 }
+
 
 export default new ApiService();
