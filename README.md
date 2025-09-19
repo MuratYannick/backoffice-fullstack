@@ -18,9 +18,15 @@ npm install
 npm run dev
 
 ## Statut du projet
-✅ Remplacement des données statiques par MySQL
-✅ Modélisation professionnelle avec Sequelize
-✅ Relations entre entités (utilisateurs ↔ articles ↔ catégories)
-✅ API robuste avec validation et gestion d'erreurs
-✅ Données de test automatiques pour le développement
-⏳ Authentification (jour 6) 
+Interface professionnelle :
+✅ Layout d'administration moderne
+✅ Navigation intuitive et responsive
+✅ Tableaux de données performants
+✅ Formulaires stylés et accessibles
+
+Composants réutilisables :
+✅ Système de design cohérent
+✅ Components UI générique (Table, Button, Badge)
+✅ Gestion des états (loading, error, empty)
+✅ Responsive design mobile-first
+
