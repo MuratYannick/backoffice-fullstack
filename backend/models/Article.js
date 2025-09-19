@@ -97,7 +97,7 @@ module.exports = (sequelize, DataTypes) => {
         // Hook AVANT validation - pour générer le slug
         beforeValidate: (article) => {
           console.log("🚀 Hook beforeValidate exécuté");
-          
+
           // Auto-génération du slug si non fourni
           if (!article.slug && article.title) {
             console.log("Génération du slug pour:", article.title);
@@ -113,7 +113,7 @@ module.exports = (sequelize, DataTypes) => {
         // Hook AVANT création - pour la date de publication
         beforeCreate: (article) => {
           console.log("🚀 Hook beforeCreate exécuté");
-          
+
           // Publication automatique si status = published
           if (article.status === "published" && !article.publishedAt) {
             article.publishedAt = new Date();
